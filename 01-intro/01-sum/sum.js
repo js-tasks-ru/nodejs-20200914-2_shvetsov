@@ -9,7 +9,7 @@ function sum(a, b) {
 }
 
 function isFiniteNumber(value) {
-    return typeof value === 'number' && Number.isFinite(value);
+    return Number.isFinite(value);
 }
 
 module.exports = sum;
