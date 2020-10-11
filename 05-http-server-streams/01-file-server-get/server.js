@@ -17,20 +17,7 @@ server.on('request', (req, res) => {
       } else {
         const stream = fs.createReadStream(filepath);
 
-        req.once('aborted', () => {
-          stream.close();
-        });
-
-        stream.on('data', chunk => {
-          stream.pause();
-          res.write(chunk, null, () => {
-            stream.resume();
-          });
-        });
-
-        stream.once('end', () => {
-          res.end();
-        });
+        stream.pipe(res);
 
         stream.once('error', (error) => {
           res.statusCode = 404;
